@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   explanationContainer:{
     flexDirection: "row",
     marginTop: 30,
-    paddingRight: 36,
+    paddingRight: 30,
   },
   icon:{
     width: 40,
