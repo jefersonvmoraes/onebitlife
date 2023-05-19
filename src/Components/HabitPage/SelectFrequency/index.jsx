@@ -18,7 +18,7 @@ export default function SelectFrequency ({ habitFrequency, frequencyInput}){
   },[]);
 
   return(
-    <View style={{ marginBotton: 20}}>
+    <View style={{ marginBottom: 20}}>
         <SelectList
         setSelected={setSelected}
         data={data}
