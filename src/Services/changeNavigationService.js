@@ -11,24 +11,24 @@ db.transaction((tx) => {
 });
 
 const setShowHome = (obj) => {
-  return new Promise((resolve, reject)=> {
-    db.transaction((tx)=>{
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
       tx.executeSql(
         "INSERT INTO change_navigation (showHome, appStartData) values (?, ?);",
-        [obj.setShowHome, obj.appStartData],
-        (_, {rowAffected, insertId})=>{
-          if (rowAffected > 0) {
+        [obj.showHome, obj.appStartData],
+        (_, { rowsAffected, insertId }) => {
+          if (rowsAffected > 0) {
             resolve(insertId);
-          }
+          } 
         },
-        (_,error)=>{
+        (_, error) => {
           reject(error);
         }
       );
-    })
-  })
-}
+    });
+  });
+};
 
 export default {
-  setShowHome,
+  setShowHome
 };
