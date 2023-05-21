@@ -100,6 +100,8 @@ export default function TimeDataPicker({
 
       {show && (
         <DateTimePicker
+          style={{marginBottom: 20}}
+          themeVariant="dark"
           testID="DateTimePicker"
           value={date}
           mode={mode}
