@@ -79,6 +79,22 @@ export default function HabitPage({ route }){
     if (notificationToggle === true && !dayNotification && !timeNotification){
       Alert.alert("Você precisa colocar a frequência e horário da notificação");
     } else {
+      HabitsService.updateHabit({
+        habitArea: habit?.habitArea,
+        habitName: habitInput,
+        habitFrequency: frequencyInput,
+        habitHasNotification: notificationToggle,
+        habitNotificationFrequency: dayNotification,
+        habitNotificationTime: timeNotification,
+        habitNotificationId: notificationToggle ? habitInput : null, 
+      }).then(()=>{
+        Alert.alert("Sucesso na atualização do hábito");
+        if(!notificationToggle){
+          //Delete Notification
+        } else {
+          //Create Notification
+        }
+      });
       navigation.navigate("Home", {
         updateHabit: `Update in ${habit?.habitArea}`,
       });
@@ -125,7 +141,7 @@ export default function HabitPage({ route }){
             { create === false ? (
               <UpdateExcludeButtons
                 handleUpdate={handleUpdateHabit}
-                habitArea={habitArea}
+                habitArea={habit?.habitArea}
                 habitInput={habitInput}
               />
             ) : (

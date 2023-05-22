@@ -22,7 +22,7 @@ export default function UpdateExcludeButtons({
         onPress={() => {
           Alert.alert(
             "Ao prosseguir você vai atualizar o hábito, tem certeza?",
-            "Ao fazer isso você pode mudar o hábito, frequência e notificação."
+            "Ao fazer isso você pode mudar o hábito, frequência e notificação.",
             [
               {
                 text: "Cancelar",
