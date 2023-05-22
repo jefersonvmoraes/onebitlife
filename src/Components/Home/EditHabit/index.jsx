@@ -1,16 +1,26 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity} from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 
 export default function EditHabit({ habit, frequency, habitArea, checkColor }){
-
+  const navigation = useNavigation();
   function HandleEdit(){
-    console.log("botao de editar clicado");
+    navigation.navigate("HabitPage", {
+      create: false,
+      habit,
+    })
   }
 
   function handleCheck(){
-    console.log(`botao de check do ${habitArea}`);
+    console.log(`botao de check do ${habit?.habitArea}`);
   }
+
+  const textNotification = 
+    habit?.habitNotificationTime == null 
+      ? `Sem notificação - ${habit?.habitFrequency}`
+      : `${habit?.habitNotificationTime} - ${habit?.habitFrequency}`;
+
   return(
     <TouchableOpacity
       activeOpacity={0.9}
@@ -18,8 +28,8 @@ export default function EditHabit({ habit, frequency, habitArea, checkColor }){
       onPress={HandleEdit}
     >
       <View style={styles.habitText}>
-        <Text style={styles.habitTitle}>{habit}</Text>
-        <Text style={styles.habitFrequency}>{frequency}</Text>
+        <Text style={styles.habitTitle}>{habit?.habitName}</Text>
+        <Text style={styles.habitFrequency}>{textNotification}</Text>
       </View>
 
       <TouchableOpacity
