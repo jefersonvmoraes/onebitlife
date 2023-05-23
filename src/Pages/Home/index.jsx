@@ -77,7 +77,12 @@ export default function Home({route}){
             ❤️ {robotDaysLife} {robotDaysLife === "01" ? "dia" : "dias"} - ✔️ 80 checks
           </Text>
           <LifeStatus/>
-          <StatusBar/>
+          <StatusBar
+            mindHabit={mindHabit?.progressBar}
+            moneyHabit={moneyHabit?.progressBar}
+            bodyHabit={bodyHabit?.progressBar}
+            funHabit={funHabit?.progressBar}
+          />
           {mindHabit ? (
             <EditHabit habit={mindHabit} checkColor="#90B7F3" />
           ) : (
