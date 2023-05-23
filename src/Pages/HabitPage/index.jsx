@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import  {useState, useEffect, useRef} from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -9,7 +9,10 @@ import {
   ScrollView,
   Alert
 } from "react-native";
+
 import * as Notifications from "expo-notifications";
+import NotificationService from "../../Services/NotificationService";
+
 import SelectHabit from "../../Components/HabitPage/SelectHabit";
 import SelectFrequency from "../../Components/HabitPage/SelectFrequency";
 import Notification from "../../Components/HabitPage/Notification";
@@ -19,9 +22,9 @@ import DefaultButton from "../../Components/Common/DefaultButton";
 import HabitsService from "../../Services/HabitsService";
 
 Notifications.setNotificationHandler({
-  handleNotification: async() => ({
+  handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: true,
+    shouldPlaySound: false,
     shouldSetBadge: false,
   }),
 });
@@ -68,6 +71,16 @@ export default function HabitPage({ route }){
         "Você precisa dizer a frequência e o horário da notificação!"
       );
     } else {
+
+      if(notificationToggle){
+        NotificationService.createNotification(
+          habitInput,
+          frequencyInput,
+          dayNotification,
+          timeNotification
+        );
+      }
+
       HabitsService.createHabit({
         habitArea: habit?.habitArea,
         habitName: habitInput,
@@ -130,20 +143,20 @@ export default function HabitPage({ route }){
   },[notificationToggle]);
 
   useEffect(()=> {
-    notificationListener.current = Notifications.addNotificationReceivedListener((notification)=>{
+
+    notificationListener.current = Notifications.addNotificationReceivedListener( notification =>{
       setNotification(notification);
     });
     responseListener.current = Notifications.addNotificationResponseReceivedListener((response)=>{
       console.log(response);
     });
     return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
+      Notifications.removeNotificationSubscription(notificationListener.current);
       Notifications.removeNotificationSubscription(responseListener.current);
     };
 
   },[])
+
 
   return(
     <View style={styles.container}>

@@ -7,7 +7,9 @@ async function createNotification(
   timeNotification
 ) {
   const habitHour = Number(timeNotification.slice(0, 2));
+  
   const habitMinutes = Number(timeNotification.slice(3,5));
+  
   let weekDay;
 
   if (dayNotification === "Domingo"){
@@ -39,7 +41,7 @@ async function createNotification(
       weekday: weekDay,
       hour: habitHour,
       minute: habitMinutes,
-    }
+    };
   }
   await Notifications.scheduleNotificationAsync({
     content: {
@@ -48,6 +50,7 @@ async function createNotification(
     },
     identifier: `${habitInput}`,
     trigger: triggerNotification,
+
   }).then((id)=>{
     console.log(id);
   });

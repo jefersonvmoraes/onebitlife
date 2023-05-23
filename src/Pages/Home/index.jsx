@@ -51,7 +51,7 @@ export default function Home({route}){
         setMoneyHabit(null);  
       }
       if(excludeArea === "Corpo"){
-        setMoneyHabit(null);
+        setBodyHabit(null);
       }
       if(excludeArea === "Humor"){
         setFunHabit(null);
