@@ -10,10 +10,16 @@ export default function UpdateExcludeButtons({
 }){
   const navigation = useNavigation();
   function handleDeleteHabit (){
+
+    HabitsService.deleteByName(habitArea)
+      .then(()=>{
+        Alert.alert("Exclusão feita com sucesso")
+        navigation.navigate("Home", {
+          excludeArea: `${habitArea}`,
+        });
+      })
+      .catch((err)=> console.log(err));
     
-    navigation.navigate("Home", {
-      excludeArea: `${habitArea}`,
-    })
   }
 
   return(
