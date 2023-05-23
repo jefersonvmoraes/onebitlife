@@ -117,8 +117,16 @@ export default function HabitPage({ route }){
         Alert.alert("Sucesso na atualização do hábito");
         if(!notificationToggle){
           //Delete Notification
+          NotificationService.deleteNotification(habit?.habitName);
         } else {
           //Create Notification
+          NotificationService.deleteNotification(habit?.habitName);
+          NotificationService.createNotification(
+            habitInput,
+            frequencyInput,
+            dayNotification,
+            timeNotification
+          );
         }
       });
       navigation.navigate("Home", {
@@ -180,7 +188,7 @@ export default function HabitPage({ route }){
             <Text style={styles.inputText}>Hábito</Text>
             <SelectHabit habit={habit} habitInput={setHabitInput}/>
             <Text style={styles.inputText}>Frequencia</Text>
-            <SelectFrequency habitFrequency={habit?.frequency} frequencyInput={setFrequencyInput}/>
+            <SelectFrequency habitFrequency={habit?.habitFrequency} frequencyInput={setFrequencyInput}/>
             {frequencyInput === "Mensal" ? null : (
               <Notification notificationToggle={notificationToggle} setNotificationToggle={setNotificationToggle}/>
             )}
@@ -224,6 +232,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(21,21,21, 0.98)"
   },
   backPageBtn:{
+    marginTop: 50,
     width: 40,
     height: 40,
     margin: 25,
