@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {View, StyleSheet} from "react-native";
 import Lottie from "lottie-react-native";
+import AnimationService from "../../../Services/AnimationService";
 
-export default function LifeStatus(){
+export default function LifeStatus({mindHabit, moneyHabit, bodyHabit, funHabit}){
   /* status :
     100 - Maximo
     50 - medio,
@@ -10,22 +11,39 @@ export default function LifeStatus(){
     00 - curto (acabou o game)
     No robo, nos temos primeiro felicidade e depois saude xx-xx
   */  
+
+  const [mind, setMind] = useState();
+  const [money, setMoney] = useState();
+  const [robot, setRobot] = useState();
+
+  useEffect(()=>{
+    AnimationService.animationStatus(
+      mindHabit?.progressBar,
+      moneyHabit?.progressBar,
+      bodyHabit?.progressBar,
+      funHabit?.progressBar,
+      setMind,
+      setMoney,
+      setRobot
+    )
+  },[mindHabit, moneyHabit, bodyHabit, funHabit]);
+
  return(
   <View style={styles.container}>
     <Lottie
-      source={require("../../../assets/education/education-100.json")}
+      source={mind}
       autoPlay
       loop
       style={styles.educacaoAnimacao}
     />  
     <Lottie
-      source={require("../../../assets/money/money-100.json")}
+      source={money}
       autoPlay
       loop
       style={styles.financasAnimacao}
     /> 
     <Lottie
-      source={require("../../../assets/robot/robot-100-100.json")}
+      source={robot}
       autoPlay
       loop
       style={styles.roboAnimacao}
