@@ -8,6 +8,9 @@ db.transaction((tx) => {
       console.log(error);
     }
   );
+  //   tx.executeSql("DROP TABLE habits;",[],()=>{
+  //   console.log("Tabela deletada");
+  // });
 });
 
 const createHabit = (obj) => {
